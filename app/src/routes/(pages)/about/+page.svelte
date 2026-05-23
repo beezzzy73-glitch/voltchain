@@ -1,14 +1,13 @@
 <script>
-	import AboutBanner from "../../../components/AboutBanner.svelte";
-	import Hero from "../../../components/Hero.svelte";
-	import ButtonLink from "../../../components/ui/ButtonLink.svelte";
+	import AboutBanner from '../../../components/AboutBanner.svelte';
+	import Hero from '../../../components/Hero.svelte';
+	import ButtonLink from '../../../components/ui/ButtonLink.svelte';
 </script>
 
 <Hero />
 
 <!-- ================= ABOUT INTRO ================= -->
 <section class="about-intro">
-
 	<div class="bg-orb one"></div>
 	<div class="bg-orb two"></div>
 
@@ -21,62 +20,55 @@
 	</div>
 
 	<div class="grid-box">
-
 		<div class="card">
-			<img src="/icons/learn.svg" alt="Learn crypto icon" />
+			<div class="icon">📘</div>
 			<p>Learn Crypto</p>
 		</div>
 
 		<div class="card">
-			<img src="/icons/wallet.svg" alt="Wallet icon" />
+			<div class="icon">🔐</div>
 			<p>Secure Wallet</p>
 		</div>
 
 		<div class="card">
-			<img src="/icons/trade.svg" alt="Trade icon" />
+			<div class="icon">💱</div>
 			<p>Start Trading</p>
 		</div>
 
 		<div class="card">
-			<img src="/icons/growth.svg" alt="Growth icon" />
+			<div class="icon">📈</div>
 			<p>Earn Rewards</p>
 		</div>
-
 	</div>
-
 </section>
 
 <!-- ================= FEATURE SECTION ================= -->
 <section class="feature-section">
-
 	<div class="feature-grid">
-
 		<div class="mini-grid">
-
 			<div class="feature-card">
-				<img src="/icons/shield.svg" alt="Security icon" />
+				<div class="icon">🛡️</div>
 				<p>Secure Transactions</p>
 				<span>Advanced encryption & protection system</span>
 			</div>
 
 			<div class="feature-card">
-				<img src="/icons/lock.svg" alt="Lock icon" />
+				<div class="icon">🔒</div>
 				<p>Safe Storage</p>
 				<span>Your assets remain fully protected</span>
 			</div>
 
 			<div class="feature-card">
-				<img src="/icons/fast.svg" alt="Speed icon" />
+				<div class="icon">⚡</div>
 				<p>Fast Execution</p>
 				<span>Lightning speed trading engine</span>
 			</div>
 
 			<div class="feature-card">
-				<img src="/icons/global.svg" alt="Global icon" />
+				<div class="icon">🌍</div>
 				<p>Global Access</p>
 				<span>Trade from anywhere in the world</span>
 			</div>
-
 		</div>
 
 		<div class="text-side">
@@ -89,15 +81,12 @@
 
 			<ButtonLink href="Explore more" />
 		</div>
-
 	</div>
-
 </section>
 
 <AboutBanner />
 
 <style>
-
 /* ================= BACKGROUND ORBS ================= */
 
 .about-intro {
@@ -157,8 +146,8 @@
 
 /* CARD */
 .card {
-	background: rgba(255,255,255,0.03);
-	border: 1px solid rgba(255,255,255,0.06);
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.06);
 	padding: 20px;
 	border-radius: 16px;
 	transition: 0.3s ease;
@@ -166,16 +155,17 @@
 	animation: fadeUp 0.8s ease;
 }
 
-.card img {
-	width: 32px;
-	margin-bottom: 10px;
-	animation: floatIcon 3s infinite ease-in-out;
-}
-
 .card:hover {
 	transform: translateY(-8px) scale(1.03);
 	border-color: var(--color-primary);
-	box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ICON */
+.icon {
+	font-size: 32px;
+	margin-bottom: 10px;
+	animation: floatIcon 3s infinite ease-in-out;
 }
 
 /* ================= FEATURE SECTION ================= */
@@ -200,17 +190,11 @@
 
 /* FEATURE CARD */
 .feature-card {
-	background: rgba(255,255,255,0.03);
-	border: 1px solid rgba(255,255,255,0.06);
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.06);
 	padding: 20px;
 	border-radius: 14px;
 	transition: 0.3s ease;
-}
-
-.feature-card img {
-	width: 28px;
-	margin-bottom: 10px;
-	animation: floatIcon 3s infinite ease-in-out;
 }
 
 .feature-card:hover {
@@ -231,11 +215,57 @@
 	letter-spacing: 2px;
 }
 
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+	.feature-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.text-side {
+		text-align: center;
+	}
+}
+
+@media (max-width: 700px) {
+	.grid-box {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.mini-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 480px) {
+	.grid-box {
+		grid-template-columns: 1fr;
+	}
+
+	.about-intro {
+		padding: 80px 16px;
+	}
+
+	.feature-section {
+		padding: 80px 16px;
+	}
+
+	.content .title {
+		font-size: 22px;
+	}
+}
+
 /* ================= ANIMATIONS ================= */
 
 @keyframes fadeUp {
-	from { opacity: 0; transform: translateY(20px); }
-	to { opacity: 1; transform: translateY(0); }
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 @keyframes floatIcon {
@@ -247,5 +277,4 @@
 	0%,100% { transform: translate(0,0); }
 	50% { transform: translate(40px, -30px); }
 }
-
 </style>

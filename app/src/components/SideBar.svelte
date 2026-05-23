@@ -1,4 +1,4 @@
-<aside class="sidebar-container">
+<aside class="sidebar-container hidden">
 
 	<!-- glow background -->
 	<div class="sidebar-glow"></div>

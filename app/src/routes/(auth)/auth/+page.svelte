@@ -1,28 +1,41 @@
 <script>
-	import Button from "../../../components/ui/Button.svelte";
+	import { superForm } from 'sveltekit-superforms';
+	import Button from '../../../components/ui/Button.svelte';
 
+	let { data } = $props();
+
+	const { form, enhance, message, errors } = superForm(data.form);
+
+	let isShowing = $state(false);
+	const toogleIsShowing = () => (isShowing = !isShowing);
 </script>
-<section class="grid items-center grid-cols-1 px-5 @3xl:grid-cols-3">
-	<form class="space-y-5">
+
+{#if $message}
+	<p>{$message}</p>
+{/if}
+
+<section class="grid grid-cols-1 items-center px-5 @3xl:grid-cols-3">
+	<form class="space-y-5" use:enhance method="POST">
 		<div>
 			<h1 class="text-2xl font-bold">Get started now</h1>
 			<p>Enter your credentials to enter your account</p>
 		</div>
 		<div class="grid grid-cols-2 gap-2 rounded-xl border border-fore p-2">
-            <Button child = 'Email' />
-            <Button child = 'Magic Link' />
+			<Button child="Email" />
+			<Button child="Magic Link" />
 		</div>
 		<div class="flex flex-col gap-2">
-			<label for="fullname">Enter Email</label>
-			<input type="text" placeholder="John Alex" class="h-13 rounded-lg border border-fore pl-3" />
-		</div>
-		<div class="flex flex-col gap-2">
-			<label for="fullname">Password</label>
+			<label for="email">Email</label>
 			<input
 				type="email"
 				placeholder="johnalex@gmail.com"
 				class="h-13 rounded-lg border border-fore pl-3"
+				name="email"
+				bind:value={$form.email}
 			/>
+			{#if $errors}
+				<small class="text-red-600">{$errors.email}</small>
+			{/if}
 		</div>
 		<div class="flex flex-col gap-2">
 			<label for="password">Password</label>
@@ -30,7 +43,12 @@
 				type="password"
 				placeholder="********"
 				class="h-13 rounded-lg border border-fore pl-3"
+				name="password"
+				bind:value={$form.password}
 			/>
+			{#if $errors}
+				<small class="text-red-600">{$errors.password}</small>
+			{/if}
 		</div>
 		<div>
 			<input type="checkbox" />
@@ -39,11 +57,17 @@
 			>
 		</div>
 		<div>
-            <Button child = 'Register' />
+			{#if isShowing}
+				<Button child="Register" formaction="?/register" />
+			{:else}
+				<Button child="Login" formaction="?/login" />
+			{/if}
 		</div>
-        <div>
-            <p>I already have an account <a href="" class="text-primary">Login in</a></p>
-        </div>
+		<div>
+			<button onclick={toogleIsShowing}
+				>{isShowing ? 'I already have an account' : 'I do not have an account'}</button
+			>
+		</div>
 	</form>
 	<div class="grid-bg col-span-2 flex h-screen items-center justify-center">
 		<img src="/illustrations/reg.svg" alt="" class="@3xl:w-100" />
