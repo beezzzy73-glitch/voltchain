@@ -2,7 +2,7 @@ import { fail, message, superValidate } from 'sveltekit-superforms';
 import type { PageServerLoad } from './$types';
 import { zod4 } from 'sveltekit-superforms/adapters';
 import { userAuth } from '$lib/schemas/auth';
-import type { Actions } from '@sveltejs/kit';
+import { redirect, type Actions } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async () => {
 	const form = await superValidate(zod4(userAuth));
@@ -32,6 +32,6 @@ export const actions: Actions = {
 		const { error: loginError } = await supabase.auth.signUp({ email, password });
 		if (loginError) return message(form, loginError.message);
 
-		return message(form, 'Login successfully');
+		return redirect(303, '/home');
 	}
 };
